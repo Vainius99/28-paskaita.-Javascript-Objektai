@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .container {
+        background-color: brown;
+        
+        
+    }
+</style>
+<body>
+
+    <input type="text" id="a" name="a">
+    <input type="text" id="b" name="b">
+
+    <button id="atsakymas">Skaiciuok</button>
+    <button id="nubrezk" onclick="Kvadratas.nubrezk()">Atvaizdavimas</button>
+
+    <p id="plotas"></p>
+    <p id="perimetras"></p>
+    <p id="istrizaine"></p>
+
+    <div class="container" id="container">
+
+    </div>
+    <script>
+        "use strict";
+
+        // 1. Susikurti objektą "Kvadratas".
+        // Objektas turi priimti du kintamuosius: a ir b kraštines.
+        // Sukurti du metodus, kurie skaičiuoja kvadrato plotą, perimetrą, įstrižainės ilgį.
+        // Informaciją išvesti į <p> žymę.
+
+         // Papildoma: a ir b kintamieji apibrežia kvadratą pikseliais. Pagal įvestas reikšmes į input, HTML nubraižomas kvadrato objektas.
+
+         var Kvadratas = {
+
+                a: 0,
+                b: 0,
+                arKvadratas: false,
+                plotas: 0,
+                perimetras: 0,
+                istrizaine: 0,
+
+           
+            
+            kvadratoTikrinimas: function() {
+            this.a = parseFloat(document.querySelector("#a").value);
+            this.b = parseFloat(document.querySelector("#b").value);
+            if (this.a = this.b) {
+                    this.arKvadratas = true;
+            }
+                return this.arKvadratas;
+            },
+
+            kvadratoPlotis: function() {
+                this.a = parseFloat(document.querySelector("#a").value);
+                this.b = parseFloat(document.querySelector("#b").value);
+                this.plotas = this.a * this.b;
+                return this.plotas;
+                
+            },
+            kvadratoPerimetras: function() {
+                this.a = parseFloat(document.querySelector("#a").value);
+                this.b = parseFloat(document.querySelector("#b").value);
+                
+                if (this.arKvadratas == true) {
+                    this.perimetras = 4 * this.a;
+                } else {
+                    this.perimetras = 2 * (this.a + this.b)
+                };
+
+                return this.perimetras;
+            },
+            kvadratoIstrizaine: function() {
+                this.a = parseFloat(document.querySelector("#a").value);
+                this.b = parseFloat(document.querySelector("#b").value);
+                if (this.arKvadratas == true) {
+                    this.istrizaine = this.a * (Math.sqrt(2));
+                } else {
+                    this.istrizaine = Math.sqrt((this.a**2) + (this.b**2));
+                }
+                return this.istrizaine;
+            },
+
+            nubrezk: function() {
+                this.a = parseFloat(document.querySelector("#a").value);
+                this.b = parseFloat(document.querySelector("#b").value);
+
+                var container = document.getElementById("#container");
+
+                document.getElementById("container").style.height = this.a + 'px';
+                document.getElementById("container").style.width = this.b + 'px';
+
+                return container;
+
+            }
+
+        };
+        
+        document.querySelector("#atsakymas").addEventListener("click", function() {
+        var isvedimoElementas = document.querySelector("#plotas");
+        isvedimoElementas.innerHTML = "Plotas: " + Kvadratas.kvadratoPlotis();
+        });
+
+        document.querySelector("#atsakymas").addEventListener("click", function() {
+        var isvedimoElementas = document.querySelector("#perimetras");
+        isvedimoElementas.innerHTML = "Perimetras: " + Kvadratas.kvadratoPerimetras();
+        });
+
+        document.querySelector("#atsakymas").addEventListener("click", function() {
+        var isvedimoElementas = document.querySelector("#istrizaine");
+        isvedimoElementas.innerHTML = "Istrizaine: " + Kvadratas.kvadratoIstrizaine();
+        });
+       
+            </script>
+    
+</body>
+</html>

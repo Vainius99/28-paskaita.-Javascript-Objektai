@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="sk1" name="sk1" value="5">
+    <input type="text" id="sk2" name="sk2" value="4">
+    <input type="text" id="sk3" name="sk3" value="3">
+
+    <button id="atsakymas" onclick="trikampis.paleidimas()"> Skaiciuok</button>
+
+<p id="plotas"></p>
+<p id="perimetras"></p>
+<p id="pusperimetris"></p>
+
+    <script>
+        "use strict"
+        
+        // 2. Susikurti objektą "Trikampis".
+        // Objektas turi priimti du kintamuosius: a, b, c kraštines.
+        // Sukurti metodus, kurie skaičiuoja plotą, perimetrą, pusperimetrį, bei kiekvieną iš trikampio kampų.
+        // Informaciją išvesti į <p> žymę.
+
+
+            var trikampis = {
+                a: 0,
+                b: 0,
+                c: 0,
+                arTrikampis: false,
+               
+                plotas: 0,
+                perimetras: 0,
+                pusperimetris: 0,
+                kampai: 0,
+
+                paleidimas: function(sk1, sk2, sk3){
+                    this.a = sk1;
+                    this.b = sk2;
+                    this.c = sk3;
+
+                },
+
+                tikrinimas: function() {
+                if(this.a + this.b > this.c && this.b + this.c > this.a && this.a + this.c > this.b ) {
+                    return true;
+                }
+                return false;
+            },
+
+                trikampioPerimetras: function() { 
+                    this.tikrinimas();
+                    if (this.tikrinimas()){
+                        this.perimetras = this.a + this.b + this.c;
+                        return this.perimetras;
+                    } else {
+                        return "Tai ne trikampis";
+                    }
+
+                },
+
+
+                trikampioPusperimetris: function() { 
+                    this.tikrinimas();
+                    if (this.tikrinimas()){
+                        this.pusperimetris = ((this.a + this.b + this.c) / 2);
+                        return this.pusperimetris;
+                    } else {
+                        return "Tai ne trikampis";
+                    }
+
+                },
+                trikampioPlotas: function() {
+                    this.tikrinimas();
+                    if (this.tikrinimas()) {
+                        this.plotas = Math.sqrt((this.pusperimetris * (this.pusperimetris - this.a) * (this.pusperimetris - this.b) *(this.pusperimetris - this.c)));
+                        return this.plotas
+                    } else {
+                        return "Tai ne trikampis";
+                    }
+                }
+
+
+
+
+
+            };
+
+       
+
+        document.querySelector("#atsakymas").addEventListener("click", function() {
+            var sk1 = parseFloat(document.querySelector('#sk1').value);
+            var sk2 = parseFloat(document.querySelector('#sk2').value);
+            var sk3 = parseFloat(document.querySelector('#sk3').value);
+            var isvedimoElementas = document.querySelector("#perimetras");
+            trikampis.paleidimas(sk1, sk2, sk3);
+            isvedimoElementas.innerHTML = "Perimetras: " + trikampis.trikampioPerimetras();
+        });
+
+        document.querySelector("#atsakymas").addEventListener("click", function() {
+            var sk1 = parseFloat(document.querySelector('#sk1').value);
+            var sk2 = parseFloat(document.querySelector('#sk2').value);
+            var sk3 = parseFloat(document.querySelector('#sk3').value);
+            var isvedimoElementas = document.querySelector("#pusperimetris");
+            trikampis.paleidimas(sk1, sk2, sk3);
+            isvedimoElementas.innerHTML = "Pusperimetris: " + trikampis.trikampioPusperimetris();
+        });
+
+        document.querySelector("#atsakymas").addEventListener("click", function() {
+            var sk1 = parseFloat(document.querySelector('#sk1').value);
+            var sk2 = parseFloat(document.querySelector('#sk2').value);
+            var sk3 = parseFloat(document.querySelector('#sk3').value);
+            var isvedimoElementas = document.querySelector("#plotas");
+            trikampis.paleidimas(sk1, sk2, sk3);
+            isvedimoElementas.innerHTML = "plotas: " + trikampis.trikampioPlotas();
+        });
+
+        // reikia formules kaip apskaiciuoti kampus
+
+
+
+
+    </script>
+    
+</body>
+</html>
