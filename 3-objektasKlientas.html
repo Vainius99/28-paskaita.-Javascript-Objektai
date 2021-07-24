@@ -5,8 +5,40 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        table { 
+            border: 1px solid black;
+        }
+        td {
+            border: 1px solid black;
+        }
+    </style>
 </head>
+
 <body>
+
+    <div class="kliento-ivedimas">
+        <input type="text" id="vardas" name="vardas" placeholder="Vardas" value="ivestasVardas"/>
+        <input type="text" id="pavarde" name="pavarde" placeholder="Pavarde" value="ivestasPavarde" />
+        <input type="text" id="asmensKodas" name="asmensKodas" placeholder="Asmens kodas" value="ivestasAsmensKodas" />
+        <input type="text" id="prisijungimoData" name="prisijungimoData" placeholder="Prisijungimo Data" value="Prisijungimo Data" />
+        <input type="text" id="adresas" name="adresas" placeholder="Adresas" value="IvestasAdresas" />
+        <input type="text" id="elpastas" name="elpastas" placeholder="El. pastas" value="Ivestas El. pastas" />
+        <button class="patvirtinti"> Patvirtinti</button>
+
+
+    </div>
+
+    <table class="klientai">
+        <tr>
+            <th>Vardas</th>
+            <th>Pavarde</th>
+            <th>Asmens kodas</th>
+            <th`>Prisijungimo data</th>
+            <th>Adresas</th>
+            <th>El. pastas</th>
+        </tr>
+    </table>
     <script>
         "use strict";
 
@@ -24,17 +56,130 @@
 
     //         Papildomai: Sukurti galimybę pridėti klientą į masyvą bei ištrinti.
 
+    function getRndInteger(min, max) {
+
+    return Math.floor(Math.random() * (max - min + 1) ) + min;
+
+}
+
+var klientuMasyvas = [];
+for(var i=0; i< 200; i++) {
+
     var klientas = {
-        vardas: null,
-        pavarde: null,
-        asmensKoas: null,
-        prisijungimoData: null,
-        adresas: null,
-        elpastas: null,
+        vardas: "",
+        pavarde: "",
+        asmensKodas: "",
+        prisijungimoData: "",
+        adresas: "",
+        elpastas: "",
+
+    }
+    
+        klientas.vardas = "vardas" + (i+1);
+        klientas.pavarde = "pavarde" +(i+1);
+        klientas.asmensKodas = getRndInteger(39512451165, 39999999999);
+        klientas.prisijungimoData = new Date();
+        klientas.adresas = "adresas" + (i+1);
+        klientas.elpastas = "testinis" + (i+1) + "@gmail.com";
+        klientuMasyvas.push(klientas);
 
     }
 
+    var isvedimoElementas = document.querySelector(".klientai");
 
+    for( var i=0; i < klientuMasyvas.length; i++) {
+        var eilute = document.createElement("tr");
+        eilute.classList.add("klientas");
+
+        var vardas = document.createElement("td");
+        vardas.innerText = klientuMasyvas[i].vardas;
+        eilute.append(vardas);
+        
+
+        var pavarde = document.createElement("td");
+        pavarde.innerText = klientuMasyvas[i].pavarde;
+        eilute.append(pavarde);
+       
+
+        var asmensKodas = document.createElement("td");
+        asmensKodas.innerText = klientuMasyvas[i].asmensKodas;
+        eilute.append(asmensKodas);
+    
+        var prisijungimoData = document.createElement("td");
+        prisijungimoData.innerText= klientuMasyvas[i].prisijungimoData;
+        eilute.append(prisijungimoData); 
+
+        var adresas = document.createElement("td");
+        adresas.innerText = klientuMasyvas[i].adresas;
+        eilute.append(adresas);
+        
+        var elpastas = document.createElement("td");
+        elpastas.innerText = klientuMasyvas[i].elpastas;
+        eilute.append(elpastas);
+        
+
+        isvedimoElementas.append(eilute);
+
+    };
+
+    document.querySelector(".patvirtinti").addEventListener("click", function() {
+        var inputVardas = document.querySelector("#vardas").value;
+        var inputPavarde = document.querySelector("#pavarde").value;
+        var inputAsmensKodas = document.querySelector("#asmensKodas").value;
+        var inputPrisijungimoData = document.querySelector("#prisijungimoData").value;
+        var inputAdresas = document.querySelector("#adresas").value;
+        var inputElpastas = document.querySelector("#elpastas").value;
+
+        klientas = {
+            vardas : inputVardas,
+            pavarde : inputPavarde,
+            asmensKodas : inputAsmensKodas,
+            prisijungimoData : inputPrisijungimoData,
+            adresas : inputAdresas,
+            elpastas : inputElpastas,
+        }
+    
+    
+
+    klientuMasyvas.push(klientas);
+
+    var paskutinisElementas = klientuMasyvas.length-1;
+    var eilute = document.createElement("tr");
+        eilute.classList.add("klientas");
+
+        var vardas = document.createElement("td");
+        vardas.innerText = klientuMasyvas[paskutinisElementas].vardas;
+        eilute.append(vardas);
+        
+
+        var pavarde = document.createElement("td");
+        pavarde.innerText = klientuMasyvas[paskutinisElementas].pavarde;
+        eilute.append(pavarde);
+       
+
+        var asmensKodas = document.createElement("td");
+        asmensKodas.innerText = klientuMasyvas[paskutinisElementas].asmensKodas;
+        eilute.append(asmensKodas);
+    
+        var prisijungimoData = document.createElement("td");
+        prisijungimoData.innerText = klientuMasyvas[paskutinisElementas].prisijungimoData;
+        eilute.append(prisijungimoData); 
+
+        var adresas = document.createElement("td");
+        adresas.innerText = klientuMasyvas[paskutinisElementas].adresas;
+        eilute.append(adresas);
+        
+        var elpastas = document.createElement("td");
+        elpastas.innerText = klientuMasyvas[paskutinisElementas].elpastas;
+        eilute.append(elpastas);
+
+        isvedimoElementas.append(eilute);
+
+    console.log(klientuMasyvas);
+
+});
+
+//padarytas kartu su grupe
 
 
 
